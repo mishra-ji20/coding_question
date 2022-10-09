@@ -1,0 +1,34 @@
+void fill(vector<int>arr, int n, vector<int>&prefixSum)
+{
+    prefixSum.push_vback(arr[0]);
+   
+    for (int i = 1; i < n; i++)
+        prefixSum.push_back(prefixSum[i - 1] + arr[i]);
+}
+ 
+int func(vector<int>arr,int n)
+{
+    vector<int>fd;
+    vector<int>bd;
+    fill(arr,n,fd);
+    reverse(arr.begin(),arr.end());
+    fill(arr,n,bd);
+    reverse(bd.begin(),bd.end());
+    int mi=INT_MAX;
+    int ans;
+    for(int i=0;i<arr.size()-1;i++)
+    {
+        int a=fd[i]/(i+1);
+        int b=bd[i+1]/(n-1-i);
+        int hp=abs(a-b);
+        if(hp<mi)
+        {
+            mi=hp;
+            ans=i;
+        }
+    }
+    return ans+1;
+    
+    
+    
+}
